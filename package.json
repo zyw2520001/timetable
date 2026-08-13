@@ -1,0 +1,71 @@
+{
+  "name": "smart-timetable-pro",
+  "version": "1.0.0",
+  "description": "智能课程表Pro - Electron桌面端课程管理应用",
+  "main": "dist-electron/main/index.js",
+  "author": "Smart Timetable Pro",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build:win": "vite build && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false CSC_LINK= ELECTRON_MIRROR=https://npmmirror.com/mirrors/electron/ ELECTRON_BUILDER_BINARIES_MIRROR=https://npmmirror.com/mirrors/electron-builder-binaries/ ELECTRON_CACHE=.electron-cache ELECTRON_BUILDER_CACHE=.electron-builder-cache electron-builder --win",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.52",
+    "axios": "^1.7.7",
+    "dayjs": "^1.11.13",
+    "ics": "^3.8.1",
+    "pdfjs-dist": "^4.7.76",
+    "vue": "^3.5.12"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "@vitejs/plugin-vue": "^5.1.4",
+    "autoprefixer": "^10.4.20",
+    "cross-env": "^7.0.3",
+    "electron": "^32.3.3",
+    "electron-builder": "^25.1.8",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.9",
+    "vite-plugin-electron": "^0.28.8",
+    "vite-plugin-electron-renderer": "^0.14.3",
+    "vue-tsc": "^2.1.6"
+  },
+  "build": {
+    "appId": "com.smarttimetable.pro",
+    "productName": "智能课程表Pro",
+    "directories": {
+      "output": "dist-release"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "build/**/*"
+    ],
+    "win": {
+      "target": [
+        "portable",
+        "nsis",
+        "dir"
+      ],
+      "icon": "build/icon.png",
+      "sign": false,
+      "signAndEditExecutable": false,
+      "forceCodeSigning": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "智能课程表Pro"
+    },
+    "asar": true,
+    "asarUnpack": [
+      "node_modules/@napi-rs/canvas/**/*",
+      "node_modules/pdfjs-dist/**/*"
+    ]
+  }
+}
